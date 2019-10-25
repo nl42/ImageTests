@@ -1,4 +1,3 @@
-
 #include "Image.h"
 
 Image::Image(unsigned int _width, unsigned _height, unsigned int _channels)
@@ -11,34 +10,41 @@ Image::Image(unsigned int _width, unsigned _height, unsigned int _channels)
 void Image::setPixel(unsigned int _x, unsigned int _y, unsigned char _r, unsigned char _g, unsigned char _b)
 {
     //calculate index into array for red (then +1 green, then +2 blue)
-    auto index = m_width;
+    size_t index = getPixelIndex(_x, _y);
     m_pixels[index] = _r;
     m_pixels[index + 1] = _g;
     m_pixels[index + 2] = _b;
 }
 
-void Image::getPixel(unsigned int _x, unsigned int _y, unsigned char& o_r, unsigned char& o_g, unsigned char& o_b)
+void Image::getPixel(unsigned int _x, unsigned int _y, unsigned char &o_r, unsigned char &o_g, unsigned char &o_b)
 {
-    size_t index = 0;
+    size_t index = getPixelIndex(_x, _y);
     o_r = m_pixels[index];
     o_g = m_pixels[index + 1];
     o_b = m_pixels[index + 2];
 }
 
-unsigned Image::width() const noexcept {
+size_t Image::getPixelIndex(unsigned int _x, unsigned int _y)
+{
+    return (_y * m_width) + (_x % m_width);
+}
+
+unsigned Image::width() const noexcept
+{
     return m_width;
 }
 
-unsigned Image::height() const noexcept {
+unsigned Image::height() const noexcept
+{
     return m_height;
 }
 
-unsigned Image::channels() const noexcept {
+unsigned Image::channels() const noexcept
+{
     return m_channels;
 }
 
-unsigned char* Image::pixels() {
+unsigned char *Image::pixels()
+{
     return m_pixels.get();
 }
-
-

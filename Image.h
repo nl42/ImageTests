@@ -6,7 +6,7 @@
 
 class Image
 {
-  public :
+public :
     Image()=default;
     Image(unsigned int _width, unsigned _height, unsigned int _channels=3);
     ~Image() noexcept =default;
@@ -25,7 +25,7 @@ private :
     unsigned int m_height=0;
     unsigned int m_channels=3;
     std::unique_ptr<unsigned char[]> m_pixels;
-
+    size_t getPixelIndex(unsigned int _x, unsigned int _y);
 };
 
 #endif

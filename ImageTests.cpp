@@ -21,7 +21,7 @@ TEST(Image, userCtor)
     EXPECT_NE(i.pixels(), nullptr);
 }
 
-TEST(Image, setPixel)
+TEST(Image, setOriginGetOriginPixel)
 {
     Image i(100,100);
     i.setPixel(0, 0, 255, 0, 0); //set pixel to red
@@ -31,3 +31,27 @@ TEST(Image, setPixel)
     EXPECT_EQ(g, 0);
     EXPECT_EQ(b, 0);
 }
+
+TEST(Image, setOtherGetOriginPixel)
+{
+    Image i(100,100);
+    i.setPixel(32, 76, 255, 255, 255); //set pixel to red
+    unsigned char r,g,b;
+    i.getPixel(0,0,r,g,b);
+    EXPECT_NE(r, 255);
+    EXPECT_NE(g, 255);
+    EXPECT_NE(b, 255);
+}
+
+TEST(Image, setOtherGetOtherPixel)
+{
+    Image i(100,100);
+    i.setPixel(32, 76, 255, 255, 255); //set pixel to red
+    unsigned char r,g,b;
+    i.getPixel(32,76,r,g,b);
+    EXPECT_EQ(r, 255);
+    EXPECT_EQ(g, 255);
+    EXPECT_EQ(b, 255);
+}
+
+
