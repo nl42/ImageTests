@@ -18,12 +18,14 @@ class Image
     unsigned int height() const noexcept;
     unsigned int channels()const noexcept;
     unsigned char* pixels();
-
+    void setPixel(unsigned int _x, unsigned int _y, unsigned char _r, unsigned char _g, unsigned char _b);
+    void getPixel(unsigned int _x, unsigned int _y, unsigned char& o_r, unsigned char& o_g, unsigned char& o_b);
 private :
     unsigned int m_width=0;
     unsigned int m_height=0;
     unsigned int m_channels=3;
     std::unique_ptr<unsigned char[]> m_pixels;
+
 };
 
 #endif
